@@ -7,3 +7,4 @@ RFC 9493 implementation in Go
 - [ ] Add error types instead of generic errors
 - [ ] Add AliasesIdentifier
 - [ ] Add usage examples
+- [ ] Add docs
