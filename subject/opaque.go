@@ -1,9 +1,8 @@
 package subject
 
 import (
-	"errors"
-
 	"github.com/psychdonim/rfc9493-go/internal"
+	"github.com/psychdonim/rfc9493-go/internal/errors"
 )
 
 const OPAQUE_FORMAT = "opaque"
@@ -23,12 +22,12 @@ func (o *OpaqueIdentifier) Format() string {
 
 func (o *OpaqueIdentifier) fromSubjectId(s *internal.SubjectId) error {
 	if s.Format != OPAQUE_FORMAT {
-		return errors.New("subject id mismatched format")
+		return errors.NewMismatchedFormatError(OPAQUE_FORMAT, s.Format)
 	}
 
 	id, ok := s.Fields[OPAQUE_ID_NAME]
 	if !ok {
-		return errors.New("field iss not presented")
+		return errors.NewMissedFieldError(OPAQUE_ID_NAME)
 	}
 
 	o.Id = id

@@ -1,9 +1,8 @@
 package subject
 
 import (
-	"errors"
-
 	"github.com/psychdonim/rfc9493-go/internal"
+	"github.com/psychdonim/rfc9493-go/internal/errors"
 )
 
 const PHONE_FORMAT = "phone_number"
@@ -23,12 +22,12 @@ func (p *PhoneNumberIdentifier) Format() string {
 
 func (p *PhoneNumberIdentifier) fromSubjectId(s *internal.SubjectId) error {
 	if s.Format != PHONE_FORMAT {
-		return errors.New("subject id mismatched format")
+		return errors.NewMismatchedFormatError(PHONE_FORMAT, s.Format)
 	}
 
 	phone, ok := s.Fields[PHONE_ID_NAME]
 	if !ok {
-		return errors.New("field iss not presented")
+		return errors.NewMissedFieldError(PHONE_ID_NAME)
 	}
 
 	p.PhoneNumber = phone

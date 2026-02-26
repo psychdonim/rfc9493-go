@@ -1,9 +1,8 @@
 package subject
 
 import (
-	"errors"
-
 	"github.com/psychdonim/rfc9493-go/internal"
+	"github.com/psychdonim/rfc9493-go/internal/errors"
 )
 
 const URI_FORMAT = "uri"
@@ -23,12 +22,12 @@ func (u *UriIdentifier) Format() string {
 
 func (u *UriIdentifier) fromSubjectId(s *internal.SubjectId) error {
 	if s.Format != URI_FORMAT {
-		return errors.New("subject id mismatched format")
+		return errors.NewMismatchedFormatError(URI_FORMAT, s.Format)
 	}
 
 	uri, ok := s.Fields[URI_ID_NAME]
 	if !ok {
-		return errors.New("field iss not presented")
+		return errors.NewMissedFieldError(URI_ID_NAME)
 	}
 
 	u.Uri = uri

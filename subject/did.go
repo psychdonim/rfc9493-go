@@ -1,9 +1,8 @@
 package subject
 
 import (
-	"errors"
-
 	"github.com/psychdonim/rfc9493-go/internal"
+	"github.com/psychdonim/rfc9493-go/internal/errors"
 )
 
 const DID_DORMAT = "did"
@@ -23,12 +22,12 @@ func (d *DecentralizedIdentifier) Format() string {
 
 func (d *DecentralizedIdentifier) fromSubjectId(s *internal.SubjectId) error {
 	if s.Format != DID_DORMAT {
-		return errors.New("subject id mismatched format")
+		return errors.NewMismatchedFormatError(DID_DORMAT, s.Format)
 	}
 
 	url, ok := s.Fields[DID_ID_NAME]
 	if !ok {
-		return errors.New("field not presented")
+		return errors.NewMissedFieldError(DID_ID_NAME)
 	}
 
 	d.Url = url

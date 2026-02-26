@@ -1,9 +1,8 @@
 package subject
 
 import (
-	"errors"
-
 	"github.com/psychdonim/rfc9493-go/internal"
+	"github.com/psychdonim/rfc9493-go/internal/errors"
 )
 
 const EMAIL_FORMAT = "email"
@@ -23,12 +22,12 @@ func (e *EmailIdentifier) Format() string {
 
 func (e *EmailIdentifier) fromSubjectId(s *internal.SubjectId) error {
 	if s.Format != EMAIL_FORMAT {
-		return errors.New("subject id mismatched format")
+		return errors.NewMismatchedFormatError(EMAIL_FORMAT, s.Format)
 	}
 
 	email, ok := s.Fields[EMAIL_ID_NAME]
 	if !ok {
-		return errors.New("field not presented")
+		return errors.NewMissedFieldError(EMAIL_ID_NAME)
 	}
 
 	e.Email = email

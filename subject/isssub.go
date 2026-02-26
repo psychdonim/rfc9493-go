@@ -1,9 +1,8 @@
 package subject
 
 import (
-	"errors"
-
 	"github.com/psychdonim/rfc9493-go/internal"
+	"github.com/psychdonim/rfc9493-go/internal/errors"
 )
 
 const ISS_SUB_FORMAT = "iss_sub"
@@ -24,18 +23,18 @@ func (is *IssuerSubjectIdentifier) Format() string {
 }
 
 func (is *IssuerSubjectIdentifier) fromSubjectId(s *internal.SubjectId) error {
-	if s.Format != EMAIL_FORMAT {
-		return errors.New("subject id mismatched format")
+	if s.Format != ISS_SUB_FORMAT {
+		return errors.NewMismatchedFormatError(ISS_SUB_FORMAT, s.Format)
 	}
 
 	iss, ok := s.Fields[ISS_ID_NAME]
 	if !ok {
-		return errors.New("field iss not presented")
+		return errors.NewMissedFieldError(ISS_ID_NAME)
 	}
 
 	sub, ok := s.Fields[SUB_ID_NAME]
 	if !ok {
-		return errors.New("field sub is not presented")
+		return errors.NewMissedFieldError(SUB_ID_NAME)
 	}
 
 	is.Iss = iss
