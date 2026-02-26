@@ -8,3 +8,5 @@ RFC 9493 implementation in Go
 - [ ] Add AliasesIdentifier
 - [ ] Add usage examples
 - [ ] Add docs
+- [ ] Add identifiers validations
+- [ ] Add email canonicalization customizing 
