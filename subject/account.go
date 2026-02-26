@@ -20,7 +20,7 @@ func (a *AccountIdentifier) Format() string {
 	return ACCOUNT_FORMAT
 }
 
-func (a *AccountIdentifier) FromSubjectId(s *internal.SubjectId) error {
+func (a *AccountIdentifier) fromSubjectId(s *internal.SubjectId) error {
 	if s.Format != ACCOUNT_FORMAT {
 		return errors.NewMismatchedFormatError(ACCOUNT_FORMAT, s.Format)
 	}

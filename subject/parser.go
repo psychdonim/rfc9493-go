@@ -11,7 +11,7 @@ func Parse(data []byte) (SubjectIdentifier, error) {
 	switch subject.Format {
 	case ACCOUNT_FORMAT:
 		acc := &AccountIdentifier{}
-		return acc, acc.FromSubjectId(subject)
+		return acc, acc.fromSubjectId(subject)
 
 	case EMAIL_FORMAT:
 		email := &EmailIdentifier{}
