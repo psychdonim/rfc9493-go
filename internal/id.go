@@ -2,12 +2,12 @@ package internal
 
 import "encoding/json"
 
-type id struct {
+type Id struct {
 	Format string
 	Fields map[string]string
 }
 
-func (i *id) UnmarshallJSON(dec *json.Decoder) {
+func (i *Id) UnmarshallJSON(dec *json.Decoder) {
 	assertDelim(dec, '{')
 
 	for !isNextDelim(dec, '}') {

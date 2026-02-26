@@ -6,8 +6,8 @@ import (
 )
 
 type SubjectId struct {
-	id
-	Aliases []*id
+	Id
+	Aliases []*Id
 }
 
 func (s *SubjectId) UnmarshallJSON(data []byte) {
@@ -19,10 +19,10 @@ func (s *SubjectId) UnmarshallJSON(data []byte) {
 		fieldName := assertString(dec)
 		switch fieldName {
 		case "aliases":
-			s.Aliases = make([]*id, 0)
+			s.Aliases = make([]*Id, 0)
 			assertDelim(dec, '[')
 			for !isNextDelim(dec, ']') {
-				newId := &id{}
+				newId := &Id{}
 				newId.UnmarshallJSON(dec)
 
 				s.Aliases = append(s.Aliases, newId)
